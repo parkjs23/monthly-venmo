@@ -9,13 +9,13 @@ def main(now):
   """
   The main function which initiates the script.
   """
-
   load_dotenv()  # take environment variables from .env.
   actualVars = []
   for var in env_vars:
+
     actualVars.append(get_env(var))
 
-  access_token, chat_id, bot_token, k_friend_id, c_friend_id, w_friend_id, j_friend_id = actualVars
+  access_token, chat_id, bot_token, m_friend_id, e_friend_id, g_friend_id, k_friend_id, r_friend_id = actualVars
 
   month = get_month(now)
   venmo = Venmo(access_token)
@@ -23,16 +23,24 @@ def main(now):
 
   friends =[
     {
-      "name": "KRam",
+      "name": "Michelle",
+      "id": m_friend_id,
+    },
+    {
+      "name": "Elliot",
+      "id": e_friend_id,
+    },
+    {
+      "name": "Gavril",
+      "id": g_friend_id,
+    },
+    {
+      "name": "Kreston",
       "id": k_friend_id,
     },
     {
-      "name": "Chrissy",
-      "id": c_friend_id,
-    },
-    {
-      "name": "Will",
-      "id": w_friend_id,
+      "name": "Roshan",
+      "id": r_friend_id,
     },
   ]
 
@@ -41,14 +49,14 @@ def main(now):
 
   for friend in friends:
     name = friend["name"]
-    id = friend["id"]
-    description = "Spotify for the month of " + month + "— Sent by Joe's Assistant Efron 🤵🏻‍♂️"
-    amount = 3.00
+    id = venmo.get_user_id_by_username(friend["id"])
+    description = "Spotify for the month of " + month + "— Sent by VenmoSpotifyBot 🤖"
+    amount = 2.67
     message = f"""Good news old sport!
 
 I have successfully requested money from {name}.
 
-— Efron 🤵🏻‍♂️
+— VenmoSpotifyBot 🤖
     """
     success = venmo.request_money(id, amount, description, telegram.send_message(message))
     if success:
