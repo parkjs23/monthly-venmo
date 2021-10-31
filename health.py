@@ -9,7 +9,7 @@ def main(now):
   print(f'🕘 Monthly health check running on {date} at {time}.\n')
 
   print("🔍 Verifying environment variables...")
-  numOfExpected =  7
+  numOfExpected =  8
   envVarsAreDefined = verify_env_vars(env_vars, numOfExpected)
 
   if envVarsAreDefined:
@@ -23,16 +23,24 @@ def main(now):
   telegram = Telegram(bot_token, chat_id)
 
   print("🤑 Verifying Venmo client is working...")
-  userId = venmo.get_user_id_by_username("Michelle-Kim-146")
+  userIdM = venmo.get_user_id_by_username("Michelle-Kim-146")
+  userIdE = venmo.get_user_id_by_username("Toilleee")
+  userIdG = venmo.get_user_id_by_username("GavrilMoniaga")
+  userIdK = venmo.get_user_id_by_username("Kreston-Tom")
+  userIdR = venmo.get_user_id_by_username("roshantom")
 
-  if userId:
+  if userIdM and userIdE and userIdG and userIdK and userIdR:
     print('✅ Venmo client is working as expected.\n')
   else:
     print('❌ Failed to get userId using Venmo client.\n')
 
-  returnedUserId = bool(userId)
+  returnedUserIdM = bool(userIdM)
+  returnedUserIdE = bool(userIdE)
+  returnedUserIdG = bool(userIdG)
+  returnedUserIdK = bool(userIdK)
+  returnedUserIdR = bool(userIdR)
 
-  if envVarsAreDefined and returnedUserId:
+  if envVarsAreDefined and returnedUserIdM and returnedUserIdE and returnedUserIdG and returnedUserIdK and returnedUserIdR:
     print('✅ Everything looks good in the health check')
     message = """Hello old sport! 👋
 
@@ -61,7 +69,7 @@ Good luck fixing it!
 — Efron 🤵🏻‍♂️
     """
     telegram.send_message(message)
-  elif returnedUserId:
+  elif returnedUserIdM and returnedUserIdE and returnedUserIdG and returnedUserIdK and returnedUserIdR:
     print('❌ Envrionment variables check did not pass. 1/2 checks failed in health script.')
     message = """It's me again, old sport...
 
