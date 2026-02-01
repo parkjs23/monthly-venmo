@@ -51,7 +51,7 @@ def main(now):
     name = friend["name"]
     id = venmo.get_user_id_by_username(friend["id"])
     description = "Spotify for the month of " + month + "— Sent by VenmoSpotifyBot 🤖"
-    amount = 3.34
+    amount = 3.67
     message = f"""Good news old sport!
 
 I have successfully requested money from {name}.
